@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="28 28 144 144">
+  <style>
+    .brand-fill {
+      fill: #000000;
+    }
+    .brand-stroke {
+      stroke: #000000;
+    }
+  </style>
+
+  <!-- Central Circle -->
+  <circle cx="100" cy="100" r="18" class="brand-fill" />
+  
+  <!-- Rotated Branches -->
+  <!-- Branch 1 (0 deg - Up) -->
+  <g transform="rotate(0 100 100)">
+    <path d="M 100 82 L 100 40 L 65 40" class="brand-stroke" stroke-width="6" stroke-linecap="square" fill="none" />
+    <path d="M 100 60 L 120 60" class="brand-stroke" stroke-width="6" stroke-linecap="square" fill="none" />
+    <circle cx="55" cy="40" r="10" class="brand-fill" />
+    <circle cx="130" cy="60" r="10" class="brand-fill" />
+  </g>
+  
+  <!-- Branch 2 (90 deg - Right) -->
+  <g transform="rotate(90 100 100)">
+    <path d="M 100 82 L 100 40 L 65 40" class="brand-stroke" stroke-width="6" stroke-linecap="square" fill="none" />
+    <path d="M 100 60 L 120 60" class="brand-stroke" stroke-width="6" stroke-linecap="square" fill="none" />
+    <circle cx="55" cy="40" r="10" class="brand-fill" />
+    <circle cx="130" cy="60" r="10" class="brand-fill" />
+  </g>
+  
+  <!-- Branch 3 (180 deg - Down) -->
+  <g transform="rotate(180 100 100)">
+    <path d="M 100 82 L 100 40 L 65 40" class="brand-stroke" stroke-width="6" stroke-linecap="square" fill="none" />
+    <path d="M 100 60 L 120 60" class="brand-stroke" stroke-width="6" stroke-linecap="square" fill="none" />
+    <circle cx="55" cy="40" r="10" class="brand-fill" />
+    <circle cx="130" cy="60" r="10" class="brand-fill" />
+  </g>
+  
+  <!-- Branch 4 (270 deg - Left) -->
+  <g transform="rotate(270 100 100)">
+    <path d="M 100 82 L 100 40 L 65 40" class="brand-stroke" stroke-width="6" stroke-linecap="square" fill="none" />
+    <path d="M 100 60 L 120 60" class="brand-stroke" stroke-width="6" stroke-linecap="square" fill="none" />
+    <circle cx="55" cy="40" r="10" class="brand-fill" />
+    <circle cx="130" cy="60" r="10" class="brand-fill" />
+  </g>
+</svg>

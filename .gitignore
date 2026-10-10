@@ -1,0 +1,32 @@
+# Node dependencies
+node_modules/
+.local/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+backend/.env
+backend/.env.production
+.env.production
+.env.development
+
+# Agent metadata
+.agents/
+
+# Production build directories
+dist/
+build/
+
+# Logs
+*.log
+backend/*.log
+frontend/*.log
+
+# Scratch / temp files
+frontend/src/scratch/
+*.py
+frontend/final_color_migration_bw.py
+
+# Local deliverable archives and browser previews
+deliverables/

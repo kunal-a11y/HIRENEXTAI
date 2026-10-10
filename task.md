@@ -1,0 +1,22 @@
+# Task Checklist - HirenextAI AI Brain V2 Upgrades
+
+- [ ] Backend Intelligence & Cognitive Pipeline
+  - [ ] Implement 7-step pre-response pipeline in `geminiService.js` (Intent Detection, Task Planning, Context Collection, Knowledge Retrieval, AI Generation, Response Validation, Response Rendering)
+  - [ ] Enforce prompt instructions for `extractedResumeInfo` details extraction inside the resume review block in `geminiService.js`
+  - [ ] Enforce prompt instructions for `resume_job_match` JSON block schema matching resume against job descriptions in `geminiService.js`
+  - [ ] Integrate low confidence prompts and guardrails against hallucinations/fabrication on the backend
+  - [ ] Add average response time, AI success rate, task counts, and masked health checks query logic on `/analytics` endpoint in `adminRoutes.js`
+- [ ] Visual UI & Beautiful AI Output Components
+  - [ ] Define `ResumeJobMatchDashboard` in `MessageList.jsx` to render overall fit, details bar, and collapsible recommendations
+  - [ ] Add `ComparisonTable`, `Timeline`, styled status badges, checkmarks lists, warning cards, and chips inside `MessageList.jsx`
+  - [ ] Integrate 3-4 dynamic, context-aware dynamic suggestion chips at the bottom of message feeds in `MessageList.jsx` / `ChatArea.jsx`
+- [ ] Automatic Organization & Memory Settings
+  - [ ] Add `recruiter-messages` and `job-reports` folders to folders registry in `useFilesStore.js`
+  - [ ] Overhaul auto-save rules in `aiFileSaver.js` to support recruiter messages, roadmaps, job reports, and interview questions
+  - [ ] Create incremental simulated text streaming animation in `useChatStore.js` to sync with mascot thinking states
+  - [ ] Implement structured profile memory storage in `useChatStore.js` upon user consent
+  - [ ] Add custom settings tab "AI Memory" with switches, edit actions, and clear buttons in `SettingsModal.jsx`
+  - [ ] Render average response time, AI success rates, task charts, and model health stats in `AdminPanel.jsx`
+- [ ] Verification
+  - [ ] Run production build `npm run build`
+  - [ ] Verify that resume parsing, memory UI, streaming mascot, connected account checks, matching dashboards, and admin analytics operate correctly

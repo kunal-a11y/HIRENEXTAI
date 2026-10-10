@@ -1,0 +1,13 @@
+Options -MultiViews
+RewriteEngine On
+
+# Keep API requests available for the backend/proxy configuration.
+RewriteRule ^api/ - [L]
+
+# Serve real files and directories normally.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# React Router fallback.
+RewriteRule ^ index.html [L]
