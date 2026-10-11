@@ -6,8 +6,8 @@
   "main": "backend/server.js",
   "engines": { "node": "24.x" },
   "scripts": {
-    "postinstall": "npm --prefix backend ci && npm --prefix frontend ci --include=dev",
-    "build": "npm --prefix frontend run build",
+    "install:app": "npm --prefix backend ci --include=dev && npm --prefix frontend ci --include=dev",
+    "build": "npm run install:app && npm --prefix frontend run build",
     "start": "node backend/server.js",
     "test": "npm --prefix backend test"
   }

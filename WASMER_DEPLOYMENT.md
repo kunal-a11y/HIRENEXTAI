@@ -12,9 +12,18 @@ Use Node 24. The root package provides:
 
 | Step | Command |
 | --- | --- |
-| Install | `npm ci` (installs the backend and frontend via postinstall) |
+| Install | `node -e "console.log('Dependencies install during build')"` |
 | Build | `npm run build` |
-| Start | `npm start` |
+| Start | `node backend/server.js` |
+
+Enable all three command overrides. Anybuild 0.33.0 copied only the root lockfile
+before its install step in the observed deployment, so `npm ci` there fails before
+the application source is available. The install override intentionally defers
+installation. `npm run build` installs both applications from their lockfiles
+after the full repository is copied, then compiles the frontend. It includes
+development dependencies needed for compilation even when NODE_ENV is production.
+After updating these settings, redeploy the latest main commit with a fresh build.
+For local development, run `npm run install:app` to install dependencies.
 
 The backend serves `frontend/dist` and the API on the same origin. Supply the
 platform's HTTP port and `HOST=0.0.0.0`. This has been prepared and locally built,
