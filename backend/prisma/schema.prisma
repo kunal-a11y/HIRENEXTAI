@@ -1,0 +1,11 @@
+// PostgreSQL migration workspace. Application models are not migrated yet.
+// The running Express API still uses config/db.js (MySQL).
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}

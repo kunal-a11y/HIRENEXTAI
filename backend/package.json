@@ -5,7 +5,10 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "test": "node --test tests/*.test.js"
+    "test": "node --test tests/*.test.js",
+    "db:validate": "node scripts/prisma-cli.cjs validate",
+    "db:generate": "node scripts/prisma-cli.cjs generate",
+    "db:check": "node scripts/check-supabase.cjs"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +16,7 @@
   "description": "",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
+    "@prisma/client": "6.19.3",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
@@ -25,8 +29,17 @@
     "nodemailer": "^10.0.16",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
+    "pg": "8.23.1",
     "razorpay": "^2.9.6",
     "uuid": "^14.0.1",
     "xss": "^1.0.15"
+  },
+  "devDependencies": {
+    "prisma": "6.19.3"
+  },
+  "overrides": {
+    "@prisma/config": {
+      "deepmerge-ts": "8.0.0"
+    }
   }
 }

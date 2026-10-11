@@ -26,6 +26,7 @@ const { transporter } = require('./services/emailService');
 const frontendUrl = (process.env.FRONTEND_URL || 'https://hirenextai.com').replace(/\/$/, '');
 
 const initDB = async () => {
+  if (pool.dialect === 'postgres') return pool.verifySchema();
   try {
     await pool.query(`CREATE TABLE IF NOT EXISTS users (
       id INT AUTO_INCREMENT PRIMARY KEY,
@@ -548,7 +549,7 @@ const runStartupHealthCheck = async () => {
   try {
     await pool.query('SELECT 1');
     dbOk = true;
-    console.log('✅ MySQL Database connected');
+    console.log('✅ Database connected');
     tablesOk = await initDB();
     if (tablesOk) {
       console.log('✅ All tables created');
@@ -556,7 +557,7 @@ const runStartupHealthCheck = async () => {
       console.log('❌ All tables created');
     }
   } catch (err) {
-    console.log('❌ MySQL Database connected');
+    console.log('❌ Database connected');
     console.log('❌ All tables created');
   }
 

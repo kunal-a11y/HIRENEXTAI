@@ -12,7 +12,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const hashToken = (token) => crypto.createHash('sha256').update(token).digest('hex');
 
 async function saveAuthToken(userId, type, token, expiresAt) {
-  await pool.query(`CREATE TABLE IF NOT EXISTS auth_tokens (
+  if (pool.dialect !== 'postgres') await pool.query(`CREATE TABLE IF NOT EXISTS auth_tokens (
     id INT AUTO_INCREMENT PRIMARY KEY,
     userId INT NOT NULL,
     type VARCHAR(50) NOT NULL,

@@ -10,6 +10,16 @@ backend/.env
 backend/.env.production
 .env.production
 .env.development
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Platform-specific runtime downloads are not application source.
+node-portable/
 
 # Agent metadata
 .agents/

@@ -1,0 +1,1447 @@
+[
+  {
+    "name": "admin_activity_log",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "adminId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "action",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "details",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "ai_usage",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "userId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "type",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "api_keys",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "name",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "provider",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "model",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "customEndpoint",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "apiKey",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "isActive",
+        "type": "tinyint(1)",
+        "identity": false
+      },
+      {
+        "name": "isDisabled",
+        "type": "tinyint(1)",
+        "identity": false
+      },
+      {
+        "name": "totalRequests",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "totalTokens",
+        "type": "bigint(20)",
+        "identity": false
+      },
+      {
+        "name": "totalErrors",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "lastUsedAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "lastErrorAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "lastErrorMessage",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "dailyRequests",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "dailyTokens",
+        "type": "bigint(20)",
+        "identity": false
+      },
+      {
+        "name": "dailyResetAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "monthlyRequests",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "monthlyTokens",
+        "type": "bigint(20)",
+        "identity": false
+      },
+      {
+        "name": "monthlyResetAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "cooldownUntil",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "api_usage_log",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "apiKeyId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "userId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "endpoint",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "inputTokens",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "outputTokens",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "responseTimeMs",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "statusCode",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "errorMessage",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "applications",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "userId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "jobTitle",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "company",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "location",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "salary",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "status",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "matchScore",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "appliedAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "auth_tokens",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "userId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "type",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "tokenHash",
+        "type": "char(64)",
+        "identity": false
+      },
+      {
+        "name": "expiresAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "chats",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "userId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "title",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "pinned",
+        "type": "tinyint(1)",
+        "identity": false
+      },
+      {
+        "name": "archived",
+        "type": "tinyint(1)",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "company_email_attachments",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "emailId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "fileName",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "fileType",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "fileSize",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "fileData",
+        "type": "longtext",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "company_emails",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "threadId",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "mailbox",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "subject",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "senderName",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "senderEmail",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "recipientEmail",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "body",
+        "type": "longtext",
+        "identity": false
+      },
+      {
+        "name": "status",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "assignedAdminId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "direction",
+        "type": "varchar(20)",
+        "identity": false
+      },
+      {
+        "name": "hasAttachments",
+        "type": "tinyint(1)",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "scheduledAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "email_delivery_logs",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "recipient",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "templateName",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "templateVersion",
+        "type": "varchar(20)",
+        "identity": false
+      },
+      {
+        "name": "status",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "providerResponse",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "smtpCode",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "sendDurationMs",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "email_queue",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "recipient",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "templateName",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "templateVersion",
+        "type": "varchar(20)",
+        "identity": false
+      },
+      {
+        "name": "payload",
+        "type": "longtext",
+        "identity": false
+      },
+      {
+        "name": "status",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "attempts",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "lastError",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "updatedAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "files",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "userId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "type",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "title",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "content",
+        "type": "longtext",
+        "identity": false
+      },
+      {
+        "name": "jobId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "interviews",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "user_id",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "role",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "difficulty",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "overall_score",
+        "type": "decimal(5,2)",
+        "identity": false
+      },
+      {
+        "name": "questions_json",
+        "type": "longtext",
+        "identity": false
+      },
+      {
+        "name": "answers_json",
+        "type": "longtext",
+        "identity": false
+      },
+      {
+        "name": "feedback_json",
+        "type": "longtext",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "job_providers",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "name",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "displayName",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "apiKey",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "appId",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "priority",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "status",
+        "type": "varchar(20)",
+        "identity": false
+      },
+      {
+        "name": "latencyMs",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "errorRate",
+        "type": "decimal(5,2)",
+        "identity": false
+      },
+      {
+        "name": "dailyRequests",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "monthlyRequests",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "healthScore",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "lastTestedAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "updatedAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "job_search_cache",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "cacheKey",
+        "type": "char(64)",
+        "identity": false
+      },
+      {
+        "name": "query",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "location",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "results",
+        "type": "longtext",
+        "identity": false
+      },
+      {
+        "name": "resultCount",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "jobs",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "title",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "company",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "location",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "url",
+        "type": "varchar(1000)",
+        "identity": false
+      },
+      {
+        "name": "platform",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "match_score",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "login_audit_logs",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "email",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "userId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "browser",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "os",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "device",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "ipAddress",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "country",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "result",
+        "type": "varchar(20)",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "messages",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "chatId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "role",
+        "type": "varchar(20)",
+        "identity": false
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "payment_orders",
+    "columns": [
+      {
+        "name": "orderId",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "userId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "planName",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "amount",
+        "type": "bigint(20)",
+        "identity": false
+      },
+      {
+        "name": "currency",
+        "type": "varchar(3)",
+        "identity": false
+      },
+      {
+        "name": "status",
+        "type": "varchar(20)",
+        "identity": false
+      },
+      {
+        "name": "paymentId",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "billing",
+        "type": "varchar(10)",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "payments",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "userId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "orderId",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "paymentId",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "planName",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "amount",
+        "type": "decimal(10,2)",
+        "identity": false
+      },
+      {
+        "name": "currency",
+        "type": "varchar(10)",
+        "identity": false
+      },
+      {
+        "name": "status",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "plans",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "name",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "price_inr",
+        "type": "decimal(10,2)",
+        "identity": false
+      },
+      {
+        "name": "price_usd",
+        "type": "decimal(10,2)",
+        "identity": false
+      },
+      {
+        "name": "features",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "limits",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "security_logs",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "userId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "email",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "action",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "ipAddress",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "userAgent",
+        "type": "varchar(500)",
+        "identity": false
+      },
+      {
+        "name": "details",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "shared_chats",
+    "columns": [
+      {
+        "name": "id",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "title",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "messages",
+        "type": "longtext",
+        "identity": false
+      },
+      {
+        "name": "options",
+        "type": "longtext",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "support_tickets",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "name",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "email",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "subject",
+        "type": "varchar(200)",
+        "identity": false
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "category",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "status",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "repliedAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "assignedAdminId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "internalNotes",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "attachments",
+        "type": "longtext",
+        "identity": false
+      },
+      {
+        "name": "replies",
+        "type": "longtext",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "update_subscribers",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "email",
+        "type": "varchar(254)",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "users",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "firstName",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "lastName",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "email",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "phone",
+        "type": "varchar(20)",
+        "identity": false
+      },
+      {
+        "name": "passwordHash",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "plan",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "role",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "isVerified",
+        "type": "tinyint(1)",
+        "identity": false
+      },
+      {
+        "name": "linkedinUrl",
+        "type": "varchar(500)",
+        "identity": false
+      },
+      {
+        "name": "indeedUrl",
+        "type": "varchar(500)",
+        "identity": false
+      },
+      {
+        "name": "naukriUrl",
+        "type": "varchar(500)",
+        "identity": false
+      },
+      {
+        "name": "githubUrl",
+        "type": "varchar(500)",
+        "identity": false
+      },
+      {
+        "name": "lastLoginAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "updatedAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "adminNotes",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "isSuspended",
+        "type": "tinyint(1)",
+        "identity": false
+      },
+      {
+        "name": "adminRoleName",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "adminPermissions",
+        "type": "text",
+        "identity": false
+      },
+      {
+        "name": "otpCode",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "otpExpiresAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "device",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "createdById",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "tokenVersion",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "browser",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "ipAddress",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "lastActiveAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "lastAction",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "sessionStatus",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "totalLogins",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "os",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "country",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "city",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "verificationStatus",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "verifiedAt",
+        "type": "datetime",
+        "identity": false
+      },
+      {
+        "name": "planExpiresAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  },
+  {
+    "name": "verification_logs",
+    "columns": [
+      {
+        "name": "id",
+        "type": "int(11)",
+        "identity": true
+      },
+      {
+        "name": "userId",
+        "type": "int(11)",
+        "identity": false
+      },
+      {
+        "name": "email",
+        "type": "varchar(255)",
+        "identity": false
+      },
+      {
+        "name": "otpCode",
+        "type": "varchar(10)",
+        "identity": false
+      },
+      {
+        "name": "status",
+        "type": "varchar(50)",
+        "identity": false
+      },
+      {
+        "name": "ipAddress",
+        "type": "varchar(100)",
+        "identity": false
+      },
+      {
+        "name": "userAgent",
+        "type": "varchar(500)",
+        "identity": false
+      },
+      {
+        "name": "createdAt",
+        "type": "datetime",
+        "identity": false
+      }
+    ]
+  }
+]

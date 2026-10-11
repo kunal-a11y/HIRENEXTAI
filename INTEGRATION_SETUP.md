@@ -6,6 +6,12 @@ Keep credentials in the ignored `backend/.env`, never in frontend code or chat. 
 
 ## Google login
 
+For the confirmed public domain **hirenextai.com**, use origin
+`https://hirenextai.com` and redirect URI
+`https://hirenextai.com/api/auth/google/callback`. The full Cloudflare DNS list,
+local-development values and remaining launch requirements are in
+[DOMAIN_SETUP.md](DOMAIN_SETUP.md).
+
 1. Create a **Web application** OAuth client in your Google Cloud project. Configure the consent screen and test users while the app is in testing mode.
 2. Set `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` and `GOOGLE_CALLBACK_URL` in the backend environment.
 3. For this local setup, register the exact redirect URI `http://localhost:5000/api/auth/google/callback`. Open the frontend using `http://localhost:3003`, consistently using **localhost**, not alternating with 127.0.0.1, so browser-bound cookies remain on the same host.

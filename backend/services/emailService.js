@@ -116,7 +116,7 @@ const sendSupportNotification = async ({ name, email, subject, message }) => {
   `;
 
   await transporter.sendMail({
-    from: `"HirenextAI" <support@hirenextai.com>`,
+    from: `"HirenextAI" <${smtpFrom}>`,
     to: 'support@hirenextai.com',
     subject: `[Contact Form] ${subject} — from ${name}`,
     html: wrapEmailContent(tableContent),
@@ -148,7 +148,7 @@ const sendUserConfirmation = async ({ name, email, subject }) => {
   `;
 
   await transporter.sendMail({
-    from: `"HirenextAI" <support@hirenextai.com>`,
+    from: `"HirenextAI" <${smtpFrom}>`,
     to: email,
     subject: `We received your message — HirenextAI Support`,
     html: wrapEmailContent(content),
@@ -176,7 +176,7 @@ const sendPasswordResetEmail = async ({ firstName, name, email, token }) => {
   `;
 
   await transporter.sendMail({
-    from: `"HirenextAI" <support@hirenextai.com>`,
+    from: `"HirenextAI" <${smtpFrom}>`,
     to: email,
     subject: `Reset your HirenextAI password 🔐`,
     html: wrapEmailContent(content),
@@ -220,7 +220,7 @@ const sendWelcomeEmail = async ({ firstName, name, email }) => {
   `;
 
   await transporter.sendMail({
-    from: `"HirenextAI" <support@hirenextai.com>`,
+    from: `"HirenextAI" <${smtpFrom}>`,
     to: email,
     subject: `Welcome to HirenextAI! 🚀 Your account is ready`,
     html: wrapEmailContent(content),
@@ -288,7 +288,7 @@ const sendPlanPurchaseEmail = async ({ firstName, name, email, planName, isDowng
   `;
 
   await transporter.sendMail({
-    from: `"HirenextAI" <support@hirenextai.com>`,
+    from: `"HirenextAI" <${smtpFrom}>`,
     to: email,
     subject: `Your HirenextAI subscription plan is updated ✉️`,
     html: wrapEmailContent(content),
@@ -316,7 +316,7 @@ const sendVerificationEmail = async ({ firstName, name, email, token }) => {
   `;
 
   await transporter.sendMail({
-    from: `"HirenextAI" <support@hirenextai.com>`,
+    from: `"HirenextAI" <${smtpFrom}>`,
     to: email,
     subject: `Verify your HirenextAI email ✉️`,
     html: wrapEmailContent(content),
@@ -350,7 +350,7 @@ const sendApplicationStatusEmail = async ({ firstName, email, jobTitle, company,
   `;
 
   await transporter.sendMail({
-    from: `"HirenextAI" <support@hirenextai.com>`,
+    from: `"HirenextAI" <${smtpFrom}>`,
     to: email,
     subject: `Status update: ${jobTitle} at ${company} — HirenextAI`,
     html: wrapEmailContent(content),
@@ -377,7 +377,7 @@ const sendAdminOtpEmail = async ({ email, otp }) => {
   `;
 
   await sendMailWithRetry({
-    from: `"HirenextAI Security" <support@hirenextai.com>`,
+    from: `"HirenextAI Security" <${smtpFrom}>`,
     to: email,
     subject: `Admin Security Verification Code: ${otp} 🔐`,
     html: wrapEmailContent(content),
@@ -403,7 +403,7 @@ const sendSupportReplyEmail = async ({ name, email, subject, originalMessage, re
   `;
 
   await transporter.sendMail({
-    from: '"HirenextAI Support" <support@hirenextai.com>',
+    from: `"HirenextAI Support" <${smtpFrom}>`,
     to: email,
     subject: `Re: ${subject} — HirenextAI Support`,
     replyTo: 'support@hirenextai.com',
@@ -431,7 +431,7 @@ const sendAnnouncementEmail = async ({ email, firstName, subject, message, ctaTe
   }
 
   await transporter.sendMail({
-    from: `"HirenextAI" <support@hirenextai.com>`,
+    from: `"HirenextAI" <${smtpFrom}>`,
     to: email,
     subject: subject,
     html: wrapEmailContent(content),
