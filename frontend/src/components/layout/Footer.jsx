@@ -1,4 +1,5 @@
 import React from "react";
+import { CareerCTA } from "../marketing/Refinements";
 import { Link } from "react-router-dom";
 import { Logo } from "../Logo";
 import { Github, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
@@ -96,7 +97,7 @@ function FooterColumn({ title, links, delay = 0 }) {
 
 export function Footer() {
   return (
-    <footer id="contact" className="bg-[#FFFFFF] border-t border-[#EAEAEA] relative z-10 overflow-hidden mt-auto backdrop-blur-xl">
+    <><CareerCTA /><footer id="contact" className="bg-[#FFFFFF] border-t border-[#EAEAEA] relative z-10 overflow-hidden mt-auto backdrop-blur-xl">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#EAEAEA] to-transparent" />
       <div className="absolute -top-32 left-1/2 h-56 w-[760px] -translate-x-1/2 rounded-full bg-neutral-50 blur-[90px] pointer-events-none opacity-50" />
       <div className="absolute bottom-0 right-[-8%] h-48 w-72 rounded-full bg-neutral-50 blur-[90px] pointer-events-none opacity-50" />
@@ -171,7 +172,7 @@ export function Footer() {
 
         <div className="pt-4 border-t border-[#EAEAEA] flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center">
           <p className="text-[#888888] text-[12px] w-full sm:w-auto font-medium">
-            Copyright 2026 HireNextAI. All rights reserved.
+            Copyright 2024–2026 HireNextAI. All rights reserved.
           </p>
           <div className="flex items-center justify-center gap-2 text-[#888888] font-medium">
             <Link to="/privacy-policy" className="text-[#888888] text-[12px] hover:text-black transition-colors duration-300">Privacy</Link>
@@ -182,6 +183,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </footer></>
   );
 }

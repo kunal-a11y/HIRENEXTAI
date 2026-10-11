@@ -12,6 +12,7 @@ import {
 import { Logo } from "../components/Logo";
 import { DemoRoleModal } from "../components/DemoRoleModal";
 import { motion, AnimatePresence } from "framer-motion";
+import CareerIllustration from '../components/auth/CareerIllustration';
 import OTPVerification from "../components/auth/OTPVerification";
 
 function InputRow({ icon: Icon, type, name, placeholder, value, onChange, required, minLength, autoFocus, rightElement }) {
@@ -184,7 +185,7 @@ export default function Auth({ adminMode = false }) {
     } catch (err) { setError(err.message || 'Sign-in could not start. Please try again.'); setGoogleLoading(false); }
   };
   const handleGoogleLogin = () => handleProviderLogin('google');
-  const handleLinkedInLogin = () => handleProviderLogin('linkedin');
+
 
   const handleSendOtp = async (e) => {
     if (e && e.preventDefault) e.preventDefault();
@@ -268,24 +269,7 @@ export default function Auth({ adminMode = false }) {
         </motion.a>
       </div>
 
-      {/* Left Panel - Hero Section */}
-      <div className="relative w-full lg:w-1/2 h-[35vh] lg:h-full overflow-hidden z-10 select-none flex-shrink-0">
-        {/* Simple fade-in without scaling/zooming to prevent billboard/branding cropping */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="absolute inset-0 w-full h-full"
-        >
-          <img 
-            src="/hero-sketch-v2.png" 
-            alt="HirenextAI City Sketch" 
-            className="w-full h-full object-fill block"
-          />
-        </motion.div>
-        {/* 10% White Overlay */}
-        <div className="absolute inset-0 bg-white/10 pointer-events-none z-20" />
-      </div>
+      <CareerIllustration />
 
       {/* Right Panel - Form Container */}
       <div className="flex-1 flex flex-col items-center py-12 px-6 lg:px-16 lg:py-16 bg-white relative z-20 min-h-[65vh] lg:h-screen lg:overflow-y-auto">
@@ -494,14 +478,13 @@ export default function Auth({ adminMode = false }) {
               </motion.button>
 
               <motion.button 
-                onClick={handleLinkedInLogin}
-                whileHover={{ scale: 1.01, y: -0.5 }}
+                disabled aria-label="LinkedIn sign-in coming soon"
                 className="flex w-full items-center justify-center gap-3 rounded-xl border border-[#E0E0E0] bg-white py-3 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 hover:border-[#C4C4C4] cursor-pointer"
               >
                 <svg className="h-4 w-4 shrink-0 text-[#0A66C2] fill-[#0A66C2]" viewBox="0 0 24 24">
                   <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                 </svg>
-                Continue with LinkedIn
+                LinkedIn · Coming soon
               </motion.button>
             </div>
 

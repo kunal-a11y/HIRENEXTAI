@@ -531,6 +531,8 @@ const initDB = async () => {
       console.error('❌ Admin verification & monitoring migration failed:', migErr.message);
     }
 
+    await require('./config/performanceIndexes').ensurePerformanceIndexes(pool);
+
     // Administrator roles must be provisioned explicitly, never seeded by email.
 
     return true;
@@ -623,6 +625,7 @@ const runStartupHealthCheck = async () => {
 const startupReady = runStartupHealthCheck();
 
 const app = express();
+app.use('/api', (req, res, next) => { res.setHeader('Cache-Control', 'no-store'); next(); });
 let dbConnected = true;
 
 // Session Security and Proxy settings
@@ -1029,7 +1032,7 @@ app.use('/api', (req, res) => res.status(404).json({ error: 'Route not found' })
 
 const frontendPath = path.join(__dirname, "../frontend/dist");
 
-app.use(express.static(frontendPath, { index: false }));
+app.use(express.static(frontendPath, { index: false, setHeaders: require('./config/assetCache').setAssetCacheHeaders }));
 
 let cachedIndexHtml = '';
 app.get('/{*splat}', (req, res) => {

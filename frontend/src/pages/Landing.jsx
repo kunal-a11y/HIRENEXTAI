@@ -2012,7 +2012,7 @@ export default function Landing() {
       </section>
 
       <FAQSection />
-      <CareerCTA />
+
 
       <Footer />
 

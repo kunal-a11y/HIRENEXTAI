@@ -20,6 +20,6 @@ export default function About() {
         </div>
       </div>
     </Reveal></section>
-    <CareerCTA />
+
   </main><Footer /></div>;
 }

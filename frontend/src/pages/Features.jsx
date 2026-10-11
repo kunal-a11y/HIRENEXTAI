@@ -479,56 +479,6 @@ export default function Features() {
         </div>
       </section>
 
-      {/* ── FINAL CTA SECTION (UPGRADED TO PREMIUM WHITE THEME) ── */}
-      <section className="relative py-24 text-center bg-white text-black overflow-hidden border-t border-neutral-100">
-        {/* Soft radial glow background */}
-        <div className="absolute inset-0 bg-radial-gradient(circle_at_center,transparent_40%,#ffffff_100%) pointer-events-none" />
-        <motion.div 
-          animate={{ 
-            scale: [1, 1.15, 1],
-            opacity: [0.4, 0.6, 0.4]
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-purple-100/10 rounded-full blur-[120px] pointer-events-none"
-        />
-        <motion.div 
-          animate={{ 
-            scale: [1.1, 1, 1.1],
-            opacity: [0.3, 0.5, 0.3]
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[250px] bg-blue-100/10 rounded-full blur-[120px] pointer-events-none"
-        />
-
-        <div className="max-w-4xl mx-auto px-4 relative z-10 flex flex-col items-center">
-          {/* Tag badge */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest bg-gradient-to-r from-orange-100 to-red-50 border border-orange-250/50 text-orange-700 mb-6 shadow-sm">
-            <Zap className="w-3 h-3 text-orange-600" /> Start Optimization
-          </div>
-
-          <h2 className="text-3xl md:text-4xl font-extrabold text-black tracking-tight leading-tight">
-            Start Building Your Career Today
-          </h2>
-          <p className="text-neutral-500 mt-4 text-xs max-w-md mx-auto leading-relaxed">
-            Register your account free to access the ATS resume analyzer, search matched job listings, and practice HR audio interviews.
-          </p>
-          <div className="mt-8 flex justify-center gap-4 flex-wrap">
-            <Link
-              to="/register"
-              className="bg-black text-white hover:bg-neutral-800 text-xs font-bold px-8 py-4 rounded-xl transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 active:scale-98"
-            >
-              Get Started Free
-            </Link>
-            <a
-              href="#products"
-              className="border border-neutral-250 bg-white hover:bg-neutral-50 text-xs font-bold px-8 py-4 rounded-xl transition-all duration-300 active:scale-98"
-            >
-              Explore AI Products
-            </a>
-          </div>
-        </div>
-      </section>
-
       <Footer />
     </div>
   );
