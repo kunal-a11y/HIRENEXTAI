@@ -49,7 +49,10 @@ backend/.env, backend/.env.local, .local, database dumps or a ZIP containing sec
 
 ## Required before public launch
 
-1. Verify Express, bcrypt, mysql2 and outbound SMTP compatibility on a staging app.
+1. Verify Express, bcryptjs, mysql2 and outbound SMTP compatibility on a staging app.
+   Native bcrypt cannot load on Wasmer's wasi/wasm32 runtime. Authentication uses
+   bcryptjs with the existing cost of 10; compatibility tests cover native bcrypt
+   hashes, Unicode passwords, wrong-password rejection and random salts.
 2. Configure verified TLS for the managed MySQL connection after obtaining the
    provider's trusted CA. The existing local MySQL connection is local-only and
    is not a secure remote database template.

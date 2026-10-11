@@ -107,7 +107,7 @@ test('a formerly hardcoded admin email stays an ordinary user at login', async (
     return [{}];
   } };
   const controller = load('controllers/authController.js', {
-    '../config/db': pool, bcrypt: { compare: async () => true },
+    '../config/db': pool, bcryptjs: { compare: async () => true },
     '../services/emailService': {}, '../services/securityLogger': { logSecurityEvent: async () => {}, logVerificationEvent: async () => {} },
     '../utils/ipHelper': { getRealIp: () => '127.0.0.1' },
   }, { JWT_SECRET: secret });
