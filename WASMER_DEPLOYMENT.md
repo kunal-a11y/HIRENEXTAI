@@ -21,7 +21,12 @@ before its install step in the observed deployment, so `npm ci` there fails befo
 the application source is available. The install override intentionally defers
 installation. `npm run build` installs both applications from their lockfiles
 after the full repository is copied, then compiles the frontend. It includes
-development dependencies needed for compilation even when NODE_ENV is production.
+frontend development dependencies needed for compilation even when NODE_ENV is
+production. The API installs only production dependencies; Prisma is development
+tooling used by the paused migration, not by the running MySQL API. In CI, the
+packaging step removes frontend/node_modules after verifying the compiled index
+exists. Only compiled frontend assets and production API dependencies are needed
+at runtime. Local builds outside CI retain the frontend development installation.
 After updating these settings, redeploy the latest main commit with a fresh build.
 For local development, run `npm run install:app` to install dependencies.
 

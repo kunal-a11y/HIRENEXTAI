@@ -7,7 +7,7 @@
   "engines": { "node": "24.x" },
   "scripts": {
     "install:app": "npm --prefix backend ci --include=dev && npm --prefix frontend ci --include=dev",
-    "build": "npm run install:app && npm --prefix frontend run build",
+    "build": "npm --prefix backend ci --omit=dev --ignore-scripts && npm --prefix frontend ci --include=dev && npm --prefix frontend run build && node scripts/package-deployment.cjs",
     "start": "node backend/server.js",
     "test": "npm --prefix backend test"
   }
