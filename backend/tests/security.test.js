@@ -69,15 +69,15 @@ test('payment verification fails closed when provider credentials are absent', a
   assert.equal(res.statusCode,503);
 });
 
-function paymentFixture({ owner = 1, paid = false, providerStatus = 'captured', amount = 14900 } = {}) {
-  const updates = [];
+function paymentFixture({ owner = 1, paid = false, providerStatus = 'captured', amount = 14900, emailFails = false } = {}) {
+  const updates = []; const emails = []; let committed = false;
   const order = { orderId:'order_abc', userId:owner, planName:'plus',amount:14900,currency:'INR',status:paid?'paid':'pending' };
-  const conn = {beginTransaction:async()=>{},commit:async()=>{},rollback:async()=>{},release(){},query:async(sql,params)=>{if(sql.startsWith('SELECT'))return [[order]];updates.push({sql,params});return [{}];}};
-  const pool = {query:async(sql,params)=>[[...(params[1]===owner?[order]:[])]],getConnection:async()=>conn};
-  const payments = load('services/payments.js', {'../config/db':pool,razorpay:class{constructor(){this.payments={fetch:async()=>({order_id:'order_abc',status:providerStatus,amount,currency:'INR'})};}}}, {RAZORPAY_KEY_ID:'rzp_test_key',RAZORPAY_KEY_SECRET:secret});
+  const conn = {beginTransaction:async()=>{},commit:async()=>{committed=true;},rollback:async()=>{},release(){},query:async(sql,params)=>{if(sql.startsWith('SELECT'))return [[order]];updates.push({sql,params});return [{}];}};
+  const pool = {query:async(sql,params)=>sql.startsWith('SELECT firstName') ? [[{firstName:'Test',email:'test@example.invalid'}]] : [[...(params[1]===owner?[order]:[])]],getConnection:async()=>conn};
+  const payments = load('services/payments.js', {'./emailService':{sendPlanPurchaseEmail:async message=>{assert.equal(committed,true);emails.push(message);if(emailFails)throw Error('SMTP unavailable');}},'../config/db':pool,razorpay:class{constructor(){this.payments={fetch:async()=>({order_id:'order_abc',status:providerStatus,amount,currency:'INR'})};}}}, {RAZORPAY_KEY_ID:'rzp_test_key',RAZORPAY_KEY_SECRET:secret});
   const signature=crypto.createHmac('sha256',secret).update('order_abc|pay_abc').digest('hex');
   const req={user:{id:1},body:{razorpay_order_id:'order_abc',razorpay_payment_id:'pay_abc',razorpay_signature:signature,plan:'pro',planId:3}};
-  return {payments,req,updates};
+  return {payments,req,updates,emails};
 }
 test('a valid payment cannot be replayed by a different account', async()=>{
   const {payments,req,updates}=paymentFixture({owner:2});const res=response();await payments.verifyPayment(req,res);
@@ -200,3 +200,15 @@ test('model access follows stored plans, rejects unknown models and downgrades e
     assert.equal(res.statusCode, item.status); assert.equal(passed, item.status === 200);
   }
 });
+
+ test('purchase confirmation follows commit and is skipped for replay',async()=>{
+  for(const paid of [false,true]) {
+   const {payments,req,emails}=paymentFixture({paid});const res=response();await payments.verifyPayment(req,res);
+   assert.equal(res.statusCode,200);assert.equal(emails.length,paid?0:1);
+   if(!paid)assert.equal(emails[0].planName,'plus');
+  }
+ });
+ test('SMTP failure does not undo a verified purchase',async()=>{
+  const {payments,req,emails}=paymentFixture({emailFails:true});const res=response();await payments.verifyPayment(req,res);
+  assert.equal(res.statusCode,200);assert.equal(res.body.plan,'plus');assert.equal(emails.length,1);
+ });

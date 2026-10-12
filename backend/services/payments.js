@@ -64,6 +64,19 @@ async function verifyPayment(req, res) {
     const days = order.billing === 'annual' ? 365 : 30;
     await connection.query('UPDATE users SET planExpiresAt = DATE_ADD(IF(plan = ?, GREATEST(COALESCE(planExpiresAt, NOW()), NOW()), NOW()), INTERVAL ? DAY), plan = ? WHERE id = ?', [order.planName, days, order.planName, req.user.id]);
     await connection.commit();
+    // Notify only after a newly verified purchase commits. Email failures must
+    // never turn a successful charge into a failed payment response.
+    try {
+      const [recipients] = await pool.query('SELECT firstName, email FROM users WHERE id = ?', [req.user.id]);
+      if (recipients[0]?.email) {
+        await require('./emailService').sendPlanPurchaseEmail({
+          firstName: recipients[0].firstName, email: recipients[0].email,
+          planName: order.planName,
+        });
+      }
+    } catch (emailError) {
+      console.error('Purchase confirmation email failed:', emailError.code || 'EMAIL_DELIVERY_FAILED');
+    }
     res.json({ message: 'Payment verified successfully', plan: order.planName });
   } catch (error) {
     if (connection) await connection.rollback();

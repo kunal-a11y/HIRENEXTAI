@@ -230,36 +230,8 @@ const sendWelcomeEmail = async ({ firstName, name, email }) => {
 // Plan Upgrade/Downgrade Confirmation Email
 const sendPlanPurchaseEmail = async ({ firstName, name, email, planName, isDowngrade }) => {
   const resolvedFirstName = firstName || (name ? name.split(' ')[0] : 'there');
-  const planFeatures = {
-    free: [
-      '20 AI Credits monthly',
-      'Basic AI career chat access',
-      'Standard application tracking'
-    ],
-    pro: [
-      'Unlimited AI Cover Letters',
-      'Advanced Mock Interview Mode',
-      '200 AI Credits per month',
-      'Resume optimization analysis',
-      'Priority Email Support'
-    ],
-    max: [
-      'Everything in Pro',
-      'Unlimited AI Credits',
-      'Real-time interview simulator',
-      'Direct Job Board integrations',
-      '1-on-1 resume feedback sessions'
-    ],
-    ultimate: [
-      'Everything in Max',
-      'Dedicated AI Recruiter agent',
-      'Personal career coach access',
-      'Guaranteed responses within 2 hours',
-      'Lifetime system access and updates'
-    ]
-  };
-
-  const currentFeatures = planFeatures[planName.toLowerCase()] || ['Access to premium AI career features', 'Enhanced credits and limits', 'Priority support'];
+  const catalogPlan = require('../config/billingCatalog').find(plan => plan.name === String(planName).toLowerCase());
+  const currentFeatures = catalogPlan?.features || ['See your account for current plan features and limits'];
   const formattedFeatures = currentFeatures.map(feat => `
     <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
       <span style="position: absolute; left: 0; color: #16A34A;">✓</span> ${feat}
