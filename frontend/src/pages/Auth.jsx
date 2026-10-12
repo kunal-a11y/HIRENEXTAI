@@ -74,7 +74,7 @@ export default function Auth({ adminMode = false }) {
   const demoEnabled = true;
   useEffect(() => {
     const reason = new URLSearchParams(location.search).get('error');
-    if (reason) setError(reason === 'email_unavailable' ? 'Admin email verification is not configured yet. Please contact the site owner.' : 'Sign-in could not be completed. Please try again or use email and password.');
+    if (reason) setError(reason === 'email_unavailable' ? 'We could not send your admin verification code. Email delivery is temporarily unavailable. Please try signing in again after the email service is restored.' : 'Sign-in could not be completed. Please try again or use email and password.');
   }, [location.search]);
 
   // Password strength calculator
@@ -255,7 +255,7 @@ export default function Auth({ adminMode = false }) {
   }
 
   return (
-    <div className="auth-refined relative flex flex-col lg:flex-row w-full min-h-screen lg:overflow-hidden bg-white text-black">
+    <div className="auth-refined relative flex flex-col lg:flex-row w-full min-h-screen bg-white text-black">
       
       {/* Top Left Logo Branding */}
       <div className="absolute top-6 left-6 md:top-8 md:left-8 z-30">
@@ -272,7 +272,7 @@ export default function Auth({ adminMode = false }) {
       <CareerIllustration />
 
       {/* Right Panel - Form Container */}
-      <div className="flex-1 flex flex-col items-center py-12 px-6 lg:px-16 lg:py-16 bg-white relative z-20 min-h-[65vh] lg:h-screen lg:overflow-y-auto">
+      <div className="auth-form-panel flex-1 flex flex-col items-center py-12 px-6 lg:px-16 lg:py-16 bg-white relative z-20 min-h-[65vh] min-w-0 self-stretch">
         <div className="w-full max-w-[420px] flex flex-col my-auto">
           
           {/* Header */}

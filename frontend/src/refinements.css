@@ -57,3 +57,7 @@
 @keyframes career-glow{0%,100%{transform:translate(0,0)}50%{transform:translate(-60px,35px)}}
 @media(max-width:1023px){.auth-art{width:100%;min-height:0;padding:115px 7% 22px}.auth-art-copy h2{font-size:32px}.auth-art-copy p,.auth-art-tags{display:none}.career-illustration{position:absolute;width:230px;right:2%;bottom:-20px;opacity:.6}.auth-art-copy{max-width:65%}}
 @media(prefers-reduced-motion:reduce){.art-float,.career-cta-inner:before{animation:none}.career-cta-inner,.career-cta .refined-button{transition:none}.career-cta-inner:hover,.career-cta .refined-button:hover{transform:none}}
+
+/* Both auth panels share the document scroll and stretch to the same height. */
+.auth-form-panel{height:auto;overflow:visible}
+@media(min-width:1024px){.auth-art{padding-top:120px;padding-bottom:36px}.career-illustration{max-height:44vh;max-height:44dvh;width:100%;margin:12px 0}.auth-form-panel{min-height:100dvh}}
