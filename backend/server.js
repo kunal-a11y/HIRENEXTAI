@@ -627,10 +627,25 @@ const runStartupHealthCheck = async () => {
   console.log('=== HEALTH CHECK COMPLETE ===');
 };
 
-const startupReady = runStartupHealthCheck();
+let startupComplete = false;
+const startDatabase = async () => {
+  try {
+    await runStartupHealthCheck();
+    startupComplete = true;
+  } catch (error) {
+    console.error('Database startup deferred:', error.message);
+    setTimeout(startDatabase, 30000).unref();
+  }
+};
+void startDatabase();
 
 const app = express();
 app.use('/api', (req, res, next) => { res.setHeader('Cache-Control', 'no-store'); next(); });
+app.use('/api', (req, res, next) => {
+  if (startupComplete) return next();
+  res.setHeader('Retry-After', '30');
+  return res.status(503).json({ error: 'The service is starting. Please try again shortly.' });
+});
 let dbConnected = true;
 
 // Session Security and Proxy settings
@@ -1006,6 +1021,8 @@ app.use('/api/admin', adminRoutes);
 
 // Health check endpoint
 app.get('/health', async (req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  if (!startupComplete) return res.status(503).json({ status: 'starting', database: 'initializing' });
   try {
     await pool.query('SELECT 1');
     dbConnected = true;
@@ -1215,8 +1232,6 @@ setInterval(async () => {
 }, 60 * 1000); // Check every minute
 
 const PORT = process.env.PORT || process.env.NODE_PORT || 3003;
-startupReady.then(() => {
-  app.listen(PORT, process.env.HOST || '127.0.0.1', () => {
-    console.log(`✅ Server running on port ${PORT}`);
-  });
-}).catch(error => { console.error(error.message); process.exit(1); });
+app.listen(PORT, process.env.HOST || '127.0.0.1', () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
