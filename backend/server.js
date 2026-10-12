@@ -173,6 +173,8 @@ const initDB = async () => {
     // Add admin columns to users table if they do not exist
     const addCol = async (tableName, colName, definition) => {
       try {
+        const [existing] = await pool.query(`SHOW COLUMNS FROM ${tableName} LIKE ?`, [colName]);
+        if (existing.length) return;
         await pool.query(`ALTER TABLE ${tableName} ADD COLUMN ${colName} ${definition}`);
         console.log(`✅ Added ${colName} column to ${tableName} table`);
       } catch (colErr) {
@@ -271,7 +273,7 @@ const initDB = async () => {
 
     // Run database migrations to ensure scheduledAt column is added
     try {
-      await pool.query('ALTER TABLE company_emails ADD COLUMN IF NOT EXISTS scheduledAt DATETIME NULL');
+      await addCol('company_emails', 'scheduledAt', 'DATETIME NULL');
     } catch (migErr) {
       console.log('Migration info:', migErr.message);
     }
@@ -304,12 +306,12 @@ const initDB = async () => {
 
     // ALTER TABLE safety migrations for existing database setups
     try {
-      await pool.query('ALTER TABLE api_keys ADD COLUMN model VARCHAR(100) DEFAULT "gemini-2.5-flash"');
+      await addCol('api_keys', 'model', "VARCHAR(100) DEFAULT 'gemini-2.5-flash'");
     } catch (e) {
       // column already exists
     }
     try {
-      await pool.query('ALTER TABLE api_keys ADD COLUMN customEndpoint VARCHAR(255) NULL');
+      await addCol('api_keys', 'customEndpoint', 'VARCHAR(255) NULL');
     } catch (e) {
       // column already exists
     }
@@ -494,14 +496,14 @@ const initDB = async () => {
         { name: 'adminPermissions', type: 'TEXT DEFAULT NULL' },
         { name: 'otpCode', type: 'VARCHAR(255) DEFAULT NULL' },
         { name: 'otpExpiresAt', type: 'DATETIME DEFAULT NULL' },
-        { name: 'device', type: 'VARCHAR(50) DEFAULT "Desktop"' },
+        { name: 'device', type: "VARCHAR(50) DEFAULT 'Desktop'" },
         { name: 'createdById', type: 'INT DEFAULT NULL' },
         { name: 'tokenVersion', type: 'INT DEFAULT 1' },
         { name: 'browser', type: 'VARCHAR(100) DEFAULT NULL' },
         { name: 'ipAddress', type: 'VARCHAR(100) DEFAULT NULL' },
         { name: 'lastActiveAt', type: 'DATETIME DEFAULT NULL' },
         { name: 'lastAction', type: 'VARCHAR(255) DEFAULT NULL' },
-        { name: 'sessionStatus', type: 'VARCHAR(50) DEFAULT "offline"' },
+        { name: 'sessionStatus', type: "VARCHAR(50) DEFAULT 'offline'" },
         { name: 'totalLogins', type: 'INT DEFAULT 0' },
         { name: 'os', type: 'VARCHAR(100) DEFAULT NULL' },
         { name: 'country', type: 'VARCHAR(100) DEFAULT NULL' },
@@ -520,7 +522,10 @@ const initDB = async () => {
 
       // Ensure existing otpCode column has sufficient length to hold SHA-256 hashes
       try {
+      const [otpColumns] = await pool.query("SHOW COLUMNS FROM users LIKE 'otpCode'");
+      if (otpColumns[0]?.Type?.toLowerCase() !== 'varchar(255)') {
         await pool.query('ALTER TABLE users MODIFY COLUMN otpCode VARCHAR(255) DEFAULT NULL');
+      }
       } catch (colErr) {
         console.warn('⚠️ Could not modify otpCode column size:', colErr.message);
       }
