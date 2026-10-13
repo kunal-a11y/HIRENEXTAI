@@ -6,12 +6,14 @@
 
 **Your intelligent career companion — powered by AI, built for job seekers.**
 
-[![License](https://img.shields.io/badge/license-MIT-black.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Proprietary-black.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-18%2B-black.svg)](https://nodejs.org)
 [![React](https://img.shields.io/badge/react-18-black.svg)](https://reactjs.org)
 [![Chrome Extension](https://img.shields.io/badge/chrome-extension-black.svg)](https://developer.chrome.com/docs/extensions/)
 
-[Live Demo](https://hirenextai.com) · [Download Extension](#-browser-extension) · [Report Bug](https://github.com/kunal-a11y/HirenextAI/issues) · [Request Feature](https://github.com/kunal-a11y/HirenextAI/issues)
+[Visit HirenextAI — hirenextai.com](https://hirenextai.com) · [Report Bug](https://github.com/kunal-a11y/HirenextAI/issues) · [Request Feature](https://github.com/kunal-a11y/HirenextAI/issues)
+
+**Proprietary software — all rights reserved.** Public visibility does not grant permission to use, modify, redistribute, or deploy this software. See [LICENSE](LICENSE) for the terms and exceptions required by GitHub's terms of service and applicable law.
 
 </div>
 
@@ -107,6 +109,8 @@ HirenextAI/
 ---
 
 ## 🚀 Getting Started
+
+The following development and deployment instructions are for the owner and separately authorized licensees only.
 
 ### Prerequisites
 
@@ -289,7 +293,13 @@ Set `VITE_API_URL` to your production backend URL (e.g., `https://api.hirenextai
 
 ## 📄 License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+Copyright (c) 2026 Kunal (kunal-a11y). All rights reserved.
+
+HirenextAI is proprietary software. Use, modification, redistribution, and deployment require a separate written license from the copyright holder, except as permitted by applicable law or GitHub's terms of service. Third-party components retain their own licenses. See [LICENSE](LICENSE).
+
+For licensing inquiries, visit [hirenextai.com](https://hirenextai.com).
+
+A public repository remains viewable, downloadable, and forkable under GitHub's terms. This license states usage restrictions; it does not encrypt the code or implement a license-key gate. Any previously granted licenses remain subject to their original terms.
 
 ---
 

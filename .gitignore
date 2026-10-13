@@ -40,3 +40,11 @@ frontend/final_color_migration_bw.py
 
 # Local deliverable archives and browser previews
 deliverables/
+
+# Local data and packaged copies must not be published.
+*.sqlite
+*.sqlite-*
+*.sqlite.bak
+*.db
+*.db-*
+*.zip

@@ -1,0 +1,73 @@
+{
+  "manifest_version": 3,
+  "name": "HirenextAI Career Assistant",
+  "version": "1.0.0",
+  "description": "Prefill application forms and track submissions with HirenextAI on LinkedIn Easy Apply and Naukri.com.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "notifications"
+  ],
+  "host_permissions": [
+    "http://localhost:5000/*",
+    "http://127.0.0.1:5000/*",
+    "*://*.linkedin.com/*",
+    "*://*.naukri.com/*",
+    "*://*.indeed.com/*",
+    "*://*.indeed.co.in/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "dist/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "js": ["dist/sidebar.js", "dist/content-linkedin.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*.naukri.com/*"
+      ],
+      "js": ["dist/sidebar.js", "dist/content-naukri.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*.indeed.com/*",
+        "*://*.indeed.co.in/*"
+      ],
+      "js": ["dist/sidebar.js", "dist/content-indeed.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/logo.png",
+        "assets/logo-icon.png"
+      ],
+      "matches": [
+        "*://*.linkedin.com/*",
+        "*://*.naukri.com/*",
+        "*://*.indeed.com/*",
+        "*://*.indeed.co.in/*"
+      ]
+    }
+  ]
+}

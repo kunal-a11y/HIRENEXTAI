@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HirenextAI Career Assistant</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="brand">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="brand-svg">
+          <circle cx="50" cy="50" r="8" fill="var(--text-primary)"/>
+          <path d="M 50 50 V 25 H 34" fill="none" stroke="var(--text-primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 50 37 H 58" fill="none" stroke="var(--text-primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="34" cy="25" r="5" fill="var(--text-primary)"/>
+          <circle cx="58" cy="37" r="5" fill="var(--text-primary)"/>
+          <path d="M 50 50 H 75 V 34" fill="none" stroke="var(--text-primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 63 50 V 58" fill="none" stroke="var(--text-primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="75" cy="34" r="5" fill="var(--text-primary)"/>
+          <circle cx="63" cy="58" r="5" fill="var(--text-primary)"/>
+          <path d="M 50 50 V 75 H 66" fill="none" stroke="var(--text-primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 50 63 H 42" fill="none" stroke="var(--text-primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="66" cy="75" r="5" fill="var(--text-primary)"/>
+          <circle cx="42" cy="63" r="5" fill="var(--text-primary)"/>
+          <path d="M 50 50 H 25 V 66" fill="none" stroke="var(--text-primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 37 50 V 42" fill="none" stroke="var(--text-primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="25" cy="66" r="5" fill="var(--text-primary)"/>
+          <circle cx="37" cy="42" r="5" fill="var(--text-primary)"/>
+        </svg>
+        <span class="brand-logo">HirenextAI</span>
+        <span class="brand-badge">MVP</span>
+      </div>
+      <div class="nav-actions">
+        <span id="global-spinner" style="display:none; font-size:12px; color:var(--accent-light);">Processing...</span>
+        <span id="user-badge" style="font-size:11px; color:var(--text-secondary); font-weight:600;"></span>
+      </div>
+    </header>
+
+    <!-- Announcement Ticker -->
+    <div id="announcement-banner" class="announcement-banner">
+      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+      <span id="announcement-text"></span>
+    </div>
+
+    <!-- Main Screens Container -->
+    <main class="container">
+      
+      <!-- SCREEN 1: Auth Screen -->
+      <section id="screen-auth" class="screen">
+        <div class="card animate-fade">
+          <h2 id="auth-title">Welcome back</h2>
+          <p id="auth-subtitle" style="margin-bottom:20px;">Sign in to unlock your browser career assistant.</p>
+          
+          <div class="form-group">
+            <label for="auth-email">Email Address</label>
+            <input type="email" id="auth-email" class="input-ctrl" placeholder="name@company.com">
+          </div>
+          
+          <div class="form-group">
+            <label for="auth-password">Password</label>
+            <input type="password" id="auth-password" class="input-ctrl" placeholder="••••••••">
+          </div>
+          
+          <button id="auth-submit-btn" class="btn btn-primary" style="width:100%; margin-top:10px;">Sign In</button>
+          
+          <p style="text-align:center; margin-top:16px; font-size:12px;">
+            <a href="#" id="auth-toggle-link" style="color:var(--accent-light); text-decoration:none;">Don't have an account? Sign Up</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- SCREEN 2: Onboarding Screen -->
+      <section id="screen-onboarding" class="screen">
+        <!-- Step Selection -->
+        <div id="onboard-select" class="animate-fade">
+          <h2 style="font-family:var(--font-title); font-size:22px; text-align:center; margin-top:20px;">Set up your Assistant</h2>
+          <p style="text-align:center; margin-bottom:30px;">How would you like to load your professional resume profile?</p>
+          
+          <div class="card" id="btn-onboard-upload" style="cursor:pointer; display:flex; flex-direction:column; gap:8px; border-color:var(--border-color); text-align:center; margin-bottom:16px;">
+            <div style="font-size:24px;">📁</div>
+            <h3 style="margin:0;">Upload Existing Resume</h3>
+            <p style="font-size:12px;">We'll automatically parse your PDF and extract skills, experience, and education structured for AI.</p>
+          </div>
+
+          <div class="card" id="btn-onboard-build" style="cursor:pointer; display:flex; flex-direction:column; gap:8px; border-color:var(--border-color); text-align:center;">
+            <div style="font-size:24px;">✨</div>
+            <h3 style="margin:0;">Create with AI Resume Builder</h3>
+            <p style="font-size:12px;">Don't have a resume? Answer a few simple questions, and our AI will build an ATS resume for you.</p>
+          </div>
+        </div>
+
+        <!-- File Upload Flow -->
+        <div id="onboard-upload-flow" style="display:none;" class="animate-fade">
+          <h2>Upload Resume</h2>
+          <p style="margin-bottom:20px;">Select a standard PDF format resume to upload.</p>
+          <div class="form-group">
+            <input type="file" id="resume-file-input" accept=".pdf" class="input-ctrl" style="padding: 20px; border-style: dashed; text-align: center;">
+          </div>
+          <button id="resume-upload-btn" class="btn btn-primary" style="width:100%;">Process & Extract Resume</button>
+          <button id="resume-upload-back" class="btn" style="width:100%; margin-top:10px;">Back</button>
+        </div>
+
+        <!-- AI Builder Wizard Flow -->
+        <div id="onboard-build-flow" style="display:none;" class="animate-fade">
+          <div class="progress-bar"><div id="wizard-progress" class="progress-fill"></div></div>
+          
+          <form id="wizard-form">
+            <!-- Step 1: Basic info -->
+            <div class="wizard-step active" data-step="1">
+              <h2>Basic Information</h2>
+              <p>Let's start with your details.</p>
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="w-name" class="input-ctrl" placeholder="John Doe" required>
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" id="w-phone" class="input-ctrl" placeholder="+1 (555) 123-4567">
+              </div>
+              <div class="form-group">
+                <label>Career Goal / Target Role</label>
+                <input type="text" id="w-goal" class="input-ctrl" placeholder="Senior Backend Engineer specializing in cloud apps.">
+              </div>
+            </div>
+
+            <!-- Step 2: Education -->
+            <div class="wizard-step" data-step="2">
+              <h2>Education Details</h2>
+              <p>Your degree and university.</p>
+              <div class="form-group">
+                <label>Degree / Major</label>
+                <input type="text" id="w-degree" class="input-ctrl" placeholder="B.S. in Computer Science" required>
+              </div>
+              <div class="form-group">
+                <label>University / School</label>
+                <input type="text" id="w-school" class="input-ctrl" placeholder="Stanford University" required>
+              </div>
+              <div class="form-group">
+                <label>Graduation Year</label>
+                <input type="text" id="w-grad" class="input-ctrl" placeholder="2024" required>
+              </div>
+            </div>
+
+            <!-- Step 3: Work Experience -->
+            <div class="wizard-step" data-step="3">
+              <h2>Work Experience</h2>
+              <p>Your latest professional role.</p>
+              <div class="form-group">
+                <label>Company Name</label>
+                <input type="text" id="w-company" class="input-ctrl" placeholder="Acme Tech Inc.">
+              </div>
+              <div class="form-group">
+                <label>Job Title</label>
+                <input type="text" id="w-role" class="input-ctrl" placeholder="Software Engineer">
+              </div>
+              <div class="form-group">
+                <label>Dates</label>
+                <input type="text" id="w-dates" class="input-ctrl" placeholder="June 2022 - Present">
+              </div>
+              <div class="form-group">
+                <label>Responsibilities / Key Achievements</label>
+                <textarea id="w-desc" class="input-ctrl" style="height:70px;" placeholder="Developed cloud features that reduced lag by 15%..."></textarea>
+              </div>
+            </div>
+
+            <!-- Step 4: Skills & Projects -->
+            <div class="wizard-step" data-step="4">
+              <h2>Skills & Projects</h2>
+              <p>What makes you stand out?</p>
+              <div class="form-group">
+                <label>Technical Skills (comma separated)</label>
+                <input type="text" id="w-skills" class="input-ctrl" placeholder="JavaScript, Node.js, REST, Git">
+              </div>
+              <div class="form-group">
+                <label>Key Project Name</label>
+                <input type="text" id="w-pname" class="input-ctrl" placeholder="E-commerce Cloud API">
+              </div>
+              <div class="form-group">
+                <label>Project Description</label>
+                <textarea id="w-pdesc" class="input-ctrl" style="height:60px;" placeholder="Built a secure GraphQL API supporting 5k active connections..."></textarea>
+              </div>
+            </div>
+
+            <!-- Wizard Controls -->
+            <div style="display:flex; justify-content:space-between; margin-top:20px; gap:10px;">
+              <button type="button" id="wizard-prev-btn" class="btn" style="flex:1;">Back</button>
+              <button type="button" id="wizard-next-btn" class="btn btn-primary" style="flex:1;">Continue</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- SCREEN 3: Dashboard Screen -->
+      <section id="screen-dashboard" class="screen">
+        <h2 style="font-family:var(--font-title); font-size:20px;">Career Assistant Dashboard</h2>
+        <p style="margin-bottom:16px;">Welcome! Click on supported job boards to activate the assistant overlays.</p>
+        
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="margin-bottom:12px; font-size:14px; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-secondary);">Your Profile Quicklook</h3>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div style="display:flex; justify-content:space-between;"><span style="color:var(--text-muted);">Name:</span><span id="dash-name" style="font-weight:600;">-</span></div>
+            <div style="display:flex; justify-content:space-between;"><span style="color:var(--text-muted);">Resume:</span><span id="dash-resume-status" class="badge badge-success">Loaded</span></div>
+            <div style="display:flex; justify-content:space-between;"><span style="color:var(--text-muted);">Skills:</span><span id="dash-skills-count" style="font-weight:600;">0</span></div>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px;">
+          <h3 style="font-size:12px; text-transform:uppercase; color:var(--text-muted); margin-bottom:2px;">Supported Platforms</h3>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <div class="card" style="padding:10px 14px; text-align:center; font-size:12px; font-weight:600; margin:0; border-color:var(--border-color);">LinkedIn</div>
+            <div class="card" style="padding:10px 14px; text-align:center; font-size:12px; font-weight:600; margin:0; border-color:var(--border-color);">Indeed</div>
+            <div class="card" style="padding:10px 14px; text-align:center; font-size:12px; font-weight:600; margin:0; border-color:var(--border-color);">Greenhouse</div>
+            <div class="card" style="padding:10px 14px; text-align:center; font-size:12px; font-weight:600; margin:0; border-color:var(--border-color);">Lever.co</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 4: Document Library Screen -->
+      <section id="screen-docs" class="screen">
+        <h2>Document Library</h2>
+        <p style="margin-bottom:12px;">Access tailored resumes, cover letters, and recruiters pitches.</p>
+        
+        <div class="search-wrapper">
+          <input type="text" id="docs-search-input" class="input-ctrl search-input" placeholder="Search saved documents...">
+          <span class="search-icon">🔍</span>
+        </div>
+
+        <div id="docs-list" class="list-container">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- SCREEN 5: Applications Screen -->
+      <section id="screen-apps" class="screen">
+        <h2>Applications Log</h2>
+        <p style="margin-bottom:12px;">Track and search your job application history.</p>
+
+        <div class="search-wrapper">
+          <input type="text" id="apps-search-input" class="input-ctrl search-input" placeholder="Search companies or roles...">
+          <span class="search-icon">🔍</span>
+        </div>
+
+        <div id="apps-list" class="list-container">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- SCREEN 6: Settings Screen -->
+      <section id="screen-settings" class="screen">
+        <h2>Settings</h2>
+        <p style="margin-bottom:20px;">Manage your profile and extension properties.</p>
+
+        <div class="card" style="display:flex; flex-direction:column; gap:12px; padding:16px;">
+          <h3 style="font-size:14px; border-bottom:1px solid var(--border-color); padding-bottom:6px; margin:0;">Application Settings</h3>
+          
+          <div class="toggle-group">
+            <span>Dark Theme</span>
+            <label class="switch">
+              <input type="checkbox" id="theme-toggle" checked disabled>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="toggle-group">
+            <span>Push Notifications</span>
+            <label class="switch">
+              <input type="checkbox" id="notifications-toggle" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px;">
+          <button id="settings-edit-profile-btn" class="btn" style="width:100%;">✏️ Edit Profile Data</button>
+          <button id="settings-export-btn" class="btn" style="width:100%;">📥 Export All Profile Data (JSON)</button>
+          <button id="settings-logout-btn" class="btn btn-danger" style="width:100%;">Sign Out</button>
+          <button id="settings-delete-btn" class="btn btn-danger" style="width:100%; opacity:0.75; font-size:12px;">Delete Account Permanently</button>
+        </div>
+      </section>
+
+      <!-- SCREEN 7: Owner Panel (Command Center) -->
+      <section id="screen-owner" class="screen">
+        <h2>Owner command Center</h2>
+        <p style="margin-bottom:16px;">Administrator configurations, API priority routers, and key telemetry.</p>
+
+        <!-- Metrics Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-label">Total Users</span>
+            <div id="owner-total-users" class="stat-value">0</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">AI Requests</span>
+            <div id="owner-total-requests" class="stat-value">0</div>
+          </div>
+        </div>
+
+        <!-- Global Announcement Composer -->
+        <div class="card" style="padding:14px; margin-bottom:16px;">
+          <h3 style="font-size:12px; text-transform:uppercase; margin-bottom:8px;">Push Global Notice</h3>
+          <div class="form-group" style="margin:0; gap:8px;">
+            <input type="text" id="owner-announcement-input" class="input-ctrl" placeholder="Type notification banner content...">
+            <button id="owner-announcement-btn" class="btn btn-primary btn-sm" style="align-self:flex-end;">Publish Banner</button>
+          </div>
+        </div>
+
+        <!-- Key / Provider Manager -->
+        <div class="card" style="padding:14px;">
+          <h3 style="font-size:12px; text-transform:uppercase; margin-bottom:10px;">AI Providers & Latency Router</h3>
+          
+          <div id="owner-providers-list">
+            <!-- Dynamic provider fields populated by JS -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Modal Overlays (e.g. Document View / Profile Edit) -->
+    <div id="overlay-doc" class="overlay">
+      <div class="overlay-content">
+        <h3 id="overlay-doc-title">Document Title</h3>
+        <textarea id="overlay-doc-editor" class="input-ctrl editor-textarea"></textarea>
+        <div style="display:flex; justify-content:flex-end; gap:8px;">
+          <button id="overlay-doc-close" class="btn btn-sm">Close</button>
+          <button id="overlay-doc-download" class="btn btn-primary btn-sm">Download PDF</button>
+          <button id="overlay-doc-save" class="btn btn-primary btn-sm">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="overlay-profile-edit" class="overlay">
+      <div class="overlay-content">
+        <h3>Edit Profile Data</h3>
+        <p>Directly modify your structured profile fields (ATS reference format).</p>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="edit-profile-name" class="input-ctrl">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text" id="edit-profile-phone" class="input-ctrl">
+        </div>
+        <div class="form-group">
+          <label>Summary Goal</label>
+          <textarea id="edit-profile-goal" class="input-ctrl" style="height:60px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Skills (comma separated)</label>
+          <input type="text" id="edit-profile-skills" class="input-ctrl">
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:8px;">
+          <button id="overlay-profile-close" class="btn btn-sm">Cancel</button>
+          <button id="overlay-profile-save" class="btn btn-primary btn-sm">Save Profile</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Provider Edit Overlay -->
+    <div id="overlay-provider-edit" class="overlay">
+      <div class="overlay-content">
+        <h3 id="provider-edit-title">Edit AI Provider</h3>
+        <div class="form-group">
+          <label>API Key</label>
+          <input type="password" id="provider-edit-key" class="input-ctrl" placeholder="••••••••••••••••">
+          <span style="font-size:10px; color:var(--text-muted);">Enter new key to update, leave blank to keep unchanged.</span>
+        </div>
+        <div class="form-group">
+          <label>Priority (1 is Highest)</label>
+          <input type="number" id="provider-edit-priority" class="input-ctrl" min="1" max="10" value="1">
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <select id="provider-edit-status" class="input-ctrl">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:8px;">
+          <button id="overlay-provider-close" class="btn btn-sm">Cancel</button>
+          <button id="overlay-provider-test" class="btn btn-sm">Test Key</button>
+          <button id="overlay-provider-save" class="btn btn-primary btn-sm">Save Configuration</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <nav id="navbar-tabs" class="tab-bar" style="display:none;">
+      <button class="tab-btn active" data-target="screen-dashboard">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
+        <span>Dashboard</span>
+      </button>
+      <button class="tab-btn" data-target="screen-docs">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        <span>Library</span>
+      </button>
+      <button class="tab-btn" data-target="screen-apps">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span>Tracker</span>
+      </button>
+      <button class="tab-btn" data-target="screen-settings">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <span>Settings</span>
+      </button>
+      <button id="tab-btn-owner" class="tab-btn" data-target="screen-owner" style="display:none;">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+        <span>Owner</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="dist/popup.js"></script>
+</body>
+</html>

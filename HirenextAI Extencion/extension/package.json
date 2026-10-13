@@ -1,0 +1,15 @@
+{
+  "name": "hirenextai-extension",
+  "version": "1.0.0",
+  "description": "Chrome Extension for HirenextAI - TypeScript edition",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.268",
+    "typescript": "^5.4.5"
+  },
+  "license": "SEE LICENSE IN ../../LICENSE",
+  "private": true,
+  "homepage": "https://hirenextai.com"
+}
