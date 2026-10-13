@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="frontend/public/hirenext-logo.png" alt="HirenextAI logo" width="128" height="128" />
+
 # 🚀 HirenextAI
 
 ### The AI Career Operating System

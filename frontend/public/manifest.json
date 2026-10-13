@@ -3,19 +3,10 @@
   "name": "HireNextAI - AI-Powered Job Portal",
   "icons": [
     {
-      "src": "favicon.png",
+      "src": "hirenext-logo.png",
       "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "favicon.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    },
-    {
-      "src": "favicon.svg",
-      "type": "image/svg+xml",
-      "sizes": "any"
+      "sizes": "1113x1113",
+      "purpose": "any"
     }
   ],
   "start_url": ".",

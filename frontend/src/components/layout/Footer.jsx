@@ -26,7 +26,7 @@ const legalLinks = [
 ];
 
 const socials = [
-  { icon: Github, href: "https://github.com/kunal-a11y/HIRENEXTAI-", label: "GitHub", color: "#24292F" },
+  { icon: Github, href: "https://github.com/kunal-a11y/HIRENEXTAI", label: "GitHub", color: "#24292F" },
   { icon: Linkedin, href: "#", label: "LinkedIn", color: "#0A66C2" },
   { icon: Instagram, href: "#", label: "Instagram", color: "#E1306C" },
   { icon: Twitter, href: "#", label: "Twitter", color: "#000000" },

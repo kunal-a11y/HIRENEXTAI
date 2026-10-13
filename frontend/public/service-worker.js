@@ -1,10 +1,9 @@
-const CACHE_NAME = 'hirenext-v1';
+const CACHE_NAME = 'hirenext-brand-20261013';
 const ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/favicon.png',
-  '/favicon.svg'
+  '/hirenext-logo.png'
 ];
 
 self.addEventListener('install', (event) => {
